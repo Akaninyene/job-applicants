@@ -13,8 +13,10 @@ import lombok.Setter;
 
 @Entity
 @Table
-public class Users {
+//this model handles authentication and authorization of users
+public class User {
 
+    //this section defines the model's fields and properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
