@@ -13,6 +13,7 @@ import lombok.Setter;
 
 @Entity
 @Table
+
 //this model stores the applicant's profile
 public class Profile {
 
@@ -20,13 +21,14 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String user; //the application is expected to automatically call the user information, so the user does not need to re-type those information they supplied while creating the account
     @Column(nullable = false, length = 15)
     private String dateOfBirth;
     @Column(nullable = false, length = 10)
     private String gender;
+    @Column(nullable = false, length = 10)
+    private String maritalStatus;
     @Column(nullable = false, length = 10)
     private String nationality;
     @Column(nullable = false, length = 15)
