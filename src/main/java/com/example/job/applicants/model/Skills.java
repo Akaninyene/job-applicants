@@ -23,6 +23,7 @@ public class Skills {
     private Long id;
     @Column(length = 100)
     private String skills;
-    @Column(length = 150)
-    private String skillsProficiency;
+    @Column(length = 1000)
+    private String skillsDescription;
+
 }

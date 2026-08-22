@@ -1,23 +1,27 @@
+// Defines the package where the Certification class is located
 package com.example.job.applicants.model;
 
+// Import JPA annotations for database mapping and Lombok annotations for generating boilerplate code
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// Lombok annotations that generate getters, setters, and constructors automatically
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
+//Marks the class as a database entity and maps it to a database table
 @Entity
 @Table
 
-//this model holds applicant's professional qualifications
+//Represents a certification entity in the application
 public class Certification {
 
-    //this section defines the model's fields and properties
+    // Defines the certification fields and their database column constraints
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,5 +35,6 @@ public class Certification {
     private String issueDate;
     @Column(length = 15)
     private String expiryDate;
+
 
 }

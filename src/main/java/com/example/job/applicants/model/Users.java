@@ -14,27 +14,18 @@ import lombok.Setter;
 @Entity
 @Table
 //this model handles authentication and authorization of users
-public class User {
+public class Users {
 
     //this section defines the model's fields and properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 50)
-    private String firstName;
-    @Column(nullable = false, length = 50)
-    private String middleName;
-    @Column(nullable = false, length = 50)
-    private String lastName;
-    @Column(nullable = false, unique = true, length = 20)
-    private String phoneNumber;
-    @Column(nullable = false, unique = true, length = 100)
-    private String email;
+    @Column(nullable = false, length = 100)
+    private String username;
     @Column(nullable = false, length = 100)
     private String password;
     @Column(nullable = false, length = 100)
     private String confirmPassword;
-    @Column(nullable = false, length = 100)
-    private String role;
+
 
 }

@@ -21,8 +21,17 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private String user; //the application is expected to automatically call the user information, so the user does not need to re-type those information they supplied while creating the account
+
+    @Column(nullable = false, length = 50)
+    private String firstName;
+    @Column(length = 50)
+    private String middleName;
+    @Column(nullable = false, length = 50)
+    private String lastName;
+    @Column(nullable = false, unique = true, length = 20)
+    private String phoneNumber;
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
     @Column(nullable = false, length = 15)
     private String dateOfBirth;
     @Column(nullable = false, length = 10)
@@ -35,14 +44,13 @@ public class Profile {
     private String state;
     @Column(nullable = false, length = 25)
     private String localGovernment;
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 200)
     private String village;
-    @Column(length = 100)
+    @Column(length = 200)
     private String address;
     @Column(name = "profile_photo_url", length = 500) //the application is expected not to store the actual image inside the User table. the image will be stored in file/object storage and save its URL or path in the database.
     private String profilePhotoUrl; //the length = 500 does not mean the image itself must be 500 KB or 500 pixels. It means the String stored in that column (e.g. URL/path = https://myapp.com/uploads/profile-photos/john.jpg) can contain up to 500 characters.
-    @Column(length = 1000)
-    private String professionalSummary;
+
 
 
 
