@@ -1,7 +1,7 @@
 // Defines the package where the CertificationService class is located
 package com.example.job.applicants.service;
 
-// Import the certification model, repository, request class, and Spring service annotation
+// Import the classes and annotations needed to build the service
 import com.example.job.applicants.model.Certification;
 import com.example.job.applicants.repository.CertificationRepository;
 import com.example.job.applicants.request.CertificationRequest;

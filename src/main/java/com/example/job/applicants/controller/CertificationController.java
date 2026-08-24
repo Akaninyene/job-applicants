@@ -1,5 +1,7 @@
+// Defines the package where the CertificationController class is located
 package com.example.job.applicants.controller;
 
+// Import the classes, annotations, and other types needed to build the controller.
 import com.example.job.applicants.model.Certification;
 import com.example.job.applicants.request.CertificationRequest;
 import com.example.job.applicants.service.CertificationService;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import java.util.List;
 
