@@ -30,16 +30,16 @@ public class UserService {
         String newPassword = userUpdateRequest.getNewPassword();
         String confirmNewPassword = userUpdateRequest.getConfirmNewPassword();
 
-    //validate passwords
+        //validate passwords
         if (newPassword == null || newPassword.isBlank()) {
             throw new IllegalArgumentException("New password is required");
         }
 
-            if (confirmNewPassword == null || confirmNewPassword.isEmpty()) {
-                throw new IllegalArgumentException("Confirm new password is required");
+        if (confirmNewPassword == null || confirmNewPassword.isEmpty()) {
+            throw new IllegalArgumentException("Confirm new password is required");
         }
 
-    //Compare new password and confirm password
+        //Compare new password and confirm password
         if (!newPassword.equals(confirmNewPassword)) {
             throw new IllegalArgumentException("New password and confirm new passwords do not match");
         }
