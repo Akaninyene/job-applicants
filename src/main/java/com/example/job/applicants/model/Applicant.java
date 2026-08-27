@@ -1,27 +1,30 @@
+// Specifies the package where the model classes are stored.
 package com.example.job.applicants.model;
 
+// Import JPA annotations for database mapping and Lombok annotations for generating boilerplate code
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+// Lombok annotations that generate getters, setters, and constructors automatically
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
+//Marks the class as a database entity and maps it to a database table
 @Entity
 @Table
 
-//this model stores the applicant's profile
-public class Profile {
+// Defines the Profile class, which is used to store information about a user's profile.
+public class Applicant {
 
-    //this section defines the model's fields and properties
+    // Defines the profile fields and their database column constraints
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, length = 50)
     private String firstName;
     @Column(length = 50)
@@ -50,8 +53,15 @@ public class Profile {
     private String address;
     @Column(name = "profile_photo_url", length = 500) //the application is expected not to store the actual image inside the User table. the image will be stored in file/object storage and save its URL or path in the database.
     private String profilePhotoUrl; //the length = 500 does not mean the image itself must be 500 KB or 500 pixels. It means the String stored in that column (e.g. URL/path = https://myapp.com/uploads/profile-photos/john.jpg) can contain up to 500 characters.
-
-
-
+    @Column(nullable = false, length = 50)
+    private String nok_fullName;
+    @Column(nullable = false, length = 20)
+    private String nok_phoneNumber;
+    @Column(nullable = false, length = 150)
+    private String nok_address;
+    @Column(nullable = false, length = 15)
+    private String nok_relationship;
+    @Column(nullable = false, length = 45)
+    private Long userid;
 
 }

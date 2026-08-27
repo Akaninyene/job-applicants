@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Table
 
-//Represents a certification entity in the application
+// Defines the Certification class, which is used to store certification information.
 public class Certification {
 
     // Defines the certification fields and their database column constraints
@@ -35,6 +35,5 @@ public class Certification {
     private String issueDate;
     @Column(length = 15)
     private String expiryDate;
-
 
 }
