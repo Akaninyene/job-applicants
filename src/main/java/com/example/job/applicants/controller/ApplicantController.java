@@ -39,7 +39,7 @@ public class ApplicantController {
 
     /**
      * @param applicantRequest details
-     * @return AppApiResponse containing the staff if found
+     * @return AppApiResponse containing the applicant if found
      */
 
     @PostMapping("/create-applicant")
@@ -87,9 +87,9 @@ public class ApplicantController {
     /**
      * @return AppApiResponse containing the find-all-applicant if found
      */
-    @GetMapping("/find-all-applicant")
+    @GetMapping("/find-all-applicants")
     @Operation(
-            summary = "find all applicant",
+            summary = "find all applicants",
             description = "find applicant"
     )
 
@@ -177,6 +177,7 @@ public class ApplicantController {
         }
 
         logger.info("Applicant successfully found ");
+
         return ResponseEntity.ok(
                 new ApiDataResponse<>(
                         true,

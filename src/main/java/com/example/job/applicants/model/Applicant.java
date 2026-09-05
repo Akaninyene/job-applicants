@@ -51,8 +51,6 @@ public class Applicant {
     private String village;
     @Column(length = 200)
     private String address;
-    @Column(name = "profile_photo_url", length = 500) //the application is expected not to store the actual image inside the User table. the image will be stored in file/object storage and save its URL or path in the database.
-    private String profilePhotoUrl; //the length = 500 does not mean the image itself must be 500 KB or 500 pixels. It means the String stored in that column (e.g. URL/path = https://myapp.com/uploads/profile-photos/john.jpg) can contain up to 500 characters.
     @Column(nullable = false, length = 50)
     private String nok_fullName;
     @Column(nullable = false, length = 20)

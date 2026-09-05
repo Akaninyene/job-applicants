@@ -4,6 +4,7 @@ package com.example.job.applicants.controller;
 // Import the classes, annotations, and other types needed to build the controller.
 import com.example.job.applicants.model.Certification;
 import com.example.job.applicants.request.CertificationRequest;
+import com.example.job.applicants.request.CertificationUpdateRequest;
 import com.example.job.applicants.service.CertificationService;
 import com.example.job.applicants.response.ApiDataResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,13 +15,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -124,6 +124,168 @@ public class CertificationController {
                 new ApiDataResponse<>(
                         true,
                         "certifications found successfully",
+                        certifications
+                )
+        );
+    }
+
+    /**
+     * @return AppApiResponse containing the find-certification-by-id if found
+     */
+
+    @GetMapping("/find-certification-by-id/{id}")
+    @Operation(
+            summary = "find certificate by id",
+            description = "find a certificate by its id"
+    )
+
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Certification id found successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> findCertificationById(@PathVariable Long id){
+        logger.info("find certificate by id");
+
+        Optional<Certification> certifications = certificationService.findCertificationById(id);
+
+        if(certifications.isEmpty()){
+            logger.info("certification not found");
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiDataResponse<>(
+                            false,
+                            "certificate not found",
+                            null
+                            )
+                    );
+        }
+
+        logger.info("Certificate successfully found");
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "certificate found successfully",
+                        certifications
+                )
+        );
+    }
+
+    /**
+     * @return AppApiResponse containing the deleted certification if found
+     */
+
+    @DeleteMapping("/delete-certificate-by-id/{id}")
+    @Operation(
+            summary = "Delete certificate",
+            description = "Delete certificate by id"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Certificate deleted successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> deleteCertificationById(@PathVariable Long id){
+        Optional<Certification> certification = certificationService.findCertificationById(id);
+
+        logger.info("Delete certificate by id");
+
+        if(certification.isEmpty()){
+            logger.info("certificate not found");
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiDataResponse<>(
+                            false,
+                            "certificate not found",
+                            null
+                    )
+            );
+        }
+
+        logger.info("Certificate successfully deleted");
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "certificate deleted successfully",
+                        certification
+                )
+        );
+    }
+
+    /**
+     * @param certificationUpdateRequest details
+     * @return AppApiResponse containing the updated applicants if found
+     */
+    @PutMapping("/update-certificates")
+    @Operation(
+            summary = "Update and save certificates",
+            description = "Update certificates"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Certificates updated successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> updateCertificates(CertificationUpdateRequest certificationUpdateRequest){
+        logger.info("Update certificate request");
+
+        Certification certifications = certificationService.updateCertification(certificationUpdateRequest);
+
+        logger.info("Certificate successfully updated");
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "certificate updated successfully",
                         certifications
                 )
         );

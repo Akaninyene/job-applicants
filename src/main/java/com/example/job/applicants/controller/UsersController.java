@@ -76,7 +76,7 @@ public class UsersController {
        );
     }
 
-    @PostMapping("/update-password")
+    @PostMapping("/update-user-password")
     @Operation(
             summary = "Update password",
             description = "Update user password"

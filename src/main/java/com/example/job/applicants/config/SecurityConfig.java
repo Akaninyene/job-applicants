@@ -1,3 +1,4 @@
+
 package com.example.job.applicants.config;
 
 import com.example.job.applicants.jwt.JwtAuthenticationFilter;
@@ -45,44 +46,48 @@ public class SecurityConfig {
             HttpSecurity http
     ) throws Exception {
 
+
         http
+                // REST APIs don't need CSRF protection
                 .csrf(csrf -> csrf.disable())
 
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(
-                                SessionCreationPolicy.STATELESS
-                        )
-                )
-
+                // Development: allow all requests without authentication
                 .authorizeHttpRequests(auth -> auth
-
-                        .requestMatchers(
-                                "/api/auth/login",
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**"
-                        ).permitAll()
-
-                        .anyRequest().authenticated()
-                )
-
-                .addFilterBefore(
-                        jwtAuthenticationFilter,
-                        UsernamePasswordAuthenticationFilter.class
+                        .anyRequest().permitAll()
                 );
 
         return http.build();
-    }
+
 
 //        http
-//                // REST APIs don't need CSRF protection
 //                .csrf(csrf -> csrf.disable())
 //
-//                // Development: allow all requests without authentication
-//                .authorizeHttpRequests(auth -> auth
-//                        .anyRequest().permitAll()
-//                );
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(
+//                                SessionCreationPolicy.STATELESS
+//                        )
+//                )
 //
+//                .authorizeHttpRequests(auth -> auth
+//
+//                        .requestMatchers(
+//                                "/api/auth/login",
+//                                "/swagger-ui/**",
+//                                "/v3/api-docs/**"
+//
+//                        ).permitAll()
+//
+//                        .anyRequest().authenticated()
+//                )
+//
+//                .addFilterBefore(
+//                        jwtAuthenticationFilter,
+//                        UsernamePasswordAuthenticationFilter.class
+//                );
 //        return http.build();
+    }
+
+
 
 }
 

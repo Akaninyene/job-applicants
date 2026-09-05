@@ -29,7 +29,6 @@ public class ApplicantRequest {
     private String localGovernment;
     private String village;
     private String address;
-    private String profilePhotoUrl; //the length = 500 does not mean the image itself must be 500 KB or 500 pixels. It means the String stored in that column (e.g. URL/path = https://myapp.com/uploads/profile-photos/john.jpg) can contain up to 500 characters.
     private String nok_fullName;
     private String nok_phoneNumber;
     private String nok_address;

@@ -5,9 +5,11 @@ package com.example.job.applicants.service;
 import com.example.job.applicants.model.Certification;
 import com.example.job.applicants.repository.CertificationRepository;
 import com.example.job.applicants.request.CertificationRequest;
+import com.example.job.applicants.request.CertificationUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // Marks the class as a service that contains the business logic for certifications
 @Service
@@ -43,4 +45,28 @@ public class CertificationService {
     public List<Certification> findAllCertifications() {
         return certificationRepository.findAll();
     }
+
+    //method to find certification by id
+    public Optional<Certification> findCertificationById(Long id) {
+        return certificationRepository.findById(id);
+    }
+
+    //method to delete certification by id
+    public void deleteCertificationById(Long id) {
+        certificationRepository.deleteById(id);
+    }
+
+    //method to update certification's information
+    public Certification updateCertification(CertificationUpdateRequest certificationUpdateRequest) {
+
+        Certification certifications = certificationRepository.findById(certificationUpdateRequest.getId()).orElse(null);
+        certifications.setCertificateName(certificationUpdateRequest.getCertificateName());
+        certifications.setIssuingOrganization(certificationUpdateRequest.getIssuingOrganization());
+        certifications.setCertificateNumber(certificationUpdateRequest.getCertificateNumber());
+        certifications.setIssueDate(certificationUpdateRequest.getIssueDate());
+        certifications.setExpiryDate(certificationUpdateRequest.getExpiryDate());
+
+        return certificationRepository.save(certifications);
+    }
 }
+

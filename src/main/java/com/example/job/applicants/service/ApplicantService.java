@@ -53,9 +53,8 @@ public class ApplicantService {
         applicant.setLocalGovernment(applicantRequest.getLocalGovernment());
         applicant.setVillage(applicantRequest.getVillage());
         applicant.setAddress(applicantRequest.getAddress());
-        applicant.setProfilePhotoUrl(applicantRequest.getProfilePhotoUrl());
         applicant.setNok_fullName(applicantRequest.getNok_fullName());
-        applicant.setPhoneNumber(applicantRequest.getPhoneNumber());
+        applicant.setNok_phoneNumber(applicantRequest.getNok_phoneNumber());
         applicant.setNok_address(applicantRequest.getNok_address());
         applicant.setNok_relationship(applicantRequest.getNok_relationship());
         applicant.setUserid(userId);
@@ -96,7 +95,6 @@ public class ApplicantService {
         applicants.setLocalGovernment(applicantUpdateRequest.getLocalGovernment());
         applicants.setVillage(applicantUpdateRequest.getVillage());
         applicants.setAddress(applicantUpdateRequest.getAddress());
-        applicants.setProfilePhotoUrl(applicantUpdateRequest.getProfilePhotoUrl());
         applicants.setNok_fullName(applicantUpdateRequest.getNok_fullName());
         applicants.setNok_phoneNumber(applicantUpdateRequest.getNok_phoneNumber());
         applicants.setNok_address(applicantUpdateRequest.getNok_address());
