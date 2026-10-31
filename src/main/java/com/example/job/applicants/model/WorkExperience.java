@@ -13,30 +13,36 @@ import lombok.Setter;
 
 @Entity
 @Table
-
-//this model handles applicant's employment history
 public class WorkExperience {
 
-    //this section defines the model's fields and properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 150)
-    private String companyName;
-    @Column(length = 100)
+
+    @Column(nullable = false, length = 100)
+    private String organisation;
+    @Column(nullable = false, length = 100)
     private String jobTitle;
-    @Column(length = 10)
+    @Column(nullable = false, length = 100)
     private String employmentType;
-    @Column(length = 15)
-    private String responsibilities;
-    @Column(length = 15)
+    @Column(nullable = false, length = 100)
+    private String workLocation;
+    @Column(nullable = false, length = 100)
     private String startDate;
-    @Column(length = 15)
+    @Column(nullable = false, length = 100)
     private String endDate;
-    @Column(length = 1000)
-    private String yearsOfExperience;
-    @Column(length = 15)
-    private String currentlyWorking;
-
-
+    @Column(nullable = false, length = 1000)
+    private String responsibilities;
+    @Column(nullable = false, length = 1000)
+    private String achievements;
+    @Column(nullable = false, length = 500)
+    private String reasonForLeaving;
+    @Column(nullable = false, length = 100)
+    private String employerName;
+    @Column(nullable = false, length = 50)
+    private String employerJobTitle;
+    @Column(nullable = false, unique = true, length = 50)
+    private String employerEmail;
+    @Column(nullable = false, unique = true, length = 50)
+    private String employerPhoneNumber;
 }

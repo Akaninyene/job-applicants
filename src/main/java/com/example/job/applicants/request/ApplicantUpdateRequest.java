@@ -5,29 +5,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-
+@AllArgsConstructor
 public class ApplicantUpdateRequest {
-    private long id;
+
+    private String profilePhotoUrl;
     private String firstName;
     private String middleName;
     private String lastName;
-    private String phoneNumber;
-    private String email;
     private String dateOfBirth;
     private String gender;
     private String maritalStatus;
-    private String nationality;
-    private String state;
-    private String localGovernment;
-    private String village;
+    private String email;
+    private String phoneNumber;
+    private String alternativePhoneNumber;
     private String address;
-    private String nok_fullName;
-    private String nok_phoneNumber;
-    private String nok_address;
-    private String nok_relationship;
-    private Long userid;
+    private String village;
+    private String localGovernment;
+    private String state;
+    private String nationality;
+    private String postCode;
+    private String nokFullName;
+    private String nokPhoneNumber;
+    private String nokRelationship;
+
 }
+
+
+

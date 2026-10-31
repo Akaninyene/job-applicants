@@ -7,12 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+public class SupportingDocumentsRequest {
 
-public class UserUpdateRequest {
-    private Long id;
-    private String oldPassword;
-    private String newPassword;
-    private String confirmNewPassword;
+    private String documentUrl;
+    private String documentName;
+    private String documentType;
 }

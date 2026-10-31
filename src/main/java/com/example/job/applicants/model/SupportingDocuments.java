@@ -13,17 +13,16 @@ import lombok.Setter;
 
 @Entity
 @Table
+public class SupportingDocuments {
 
-//this model stores applicant's skills
-public class Skills {
-
-    //this section defines the model's fields and properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 100)
-    private String skills;
-    @Column(length = 1000)
-    private String skillsDescription;
 
-}
+    @Column(length = 500)
+    private String documentUrl;
+    @Column(nullable = false, length = 50)
+    private String documentName;
+    @Column(length = 50)
+    private String documentType;
+ }

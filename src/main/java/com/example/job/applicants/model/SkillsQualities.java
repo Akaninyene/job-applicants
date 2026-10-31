@@ -13,16 +13,15 @@ import lombok.Setter;
 
 @Entity
 @Table
-//this model handles authentication and authorization of users
-public class Users {
+public class SkillsQualities {
 
-    //this section defines the model's fields and properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true, length = 100)
-    private String username;
-    @Column(nullable = false, length = 100)
-    private String password;
+
+    @Column(length = 1000)
+    private String skills;
+    @Column(length = 1000)
+    private String qualities;
 
 }

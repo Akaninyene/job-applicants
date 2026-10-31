@@ -26,3 +26,4 @@ public class ApiDataResponse<T> {
      */
     private T data;
 }
+
