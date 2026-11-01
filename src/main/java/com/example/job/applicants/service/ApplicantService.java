@@ -13,9 +13,10 @@ import java.util.Optional;
 @Service
 public class ApplicantService {
 
+    //call the repository interface
     private final ApplicantRepository applicantRepository;
 
-
+    //constructor injection
     public ApplicantService(ApplicantRepository applicantRepository) {
         this.applicantRepository = applicantRepository;
     }
