@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -124,5 +125,165 @@ public class ApplicantController {
         );
     }
 
+    /**
+     * @return AppApiResponse containing the find-applicant-by-id if found
+     */
 
+    @GetMapping("/find-applicant-by-id/{id}")
+    @Operation(
+            summary = "find applicant by id",
+            description = "find an applicant by its id"
+    )
+
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Applicant id found successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> findApplicantById(@PathVariable Long id) {
+        logger.info("Find applicant by id");
+
+        Optional<Applicant> applicant = applicantService.findApplicantById(id);
+
+        if (applicant.isEmpty()) {
+            logger.info("Applicant not found");
+
+            return ResponseEntity.ok(
+                    new ApiDataResponse<>(
+                            false,
+                            "Applicant not found",
+                            applicant
+
+                    )
+            );
+        }
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "Applicant found successfully",
+                        applicant
+                )
+        );
+
+    }
+
+
+    /**
+     * @param applicantUpdateRequest details
+     * @return AppApiResponse containing the updated applicant if found
+     */
+    @PutMapping("/update-applicant")
+    @Operation(
+            summary = "Update and save applicant",
+            description = "Update applicant"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Applicant updated successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> updateApplicant(@RequestBody ApplicantUpdateRequest applicantUpdateRequest) {
+        logger.info("Update applicant request");
+
+        Applicant applicant = applicantService.updateApplicant(applicantUpdateRequest);
+
+        logger.info("Update applicant successfully");
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "Applicant updated successfully",
+                        applicant
+                )
+        );
+    }
+
+    /**
+     * @return AppApiResponse containing the deleted applicant if found
+     */
+
+    @DeleteMapping("/delete-applicant-by-id/{id}")
+    @Operation(
+            summary = "Delete applicant",
+            description = "Delete applicant by id"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Applicant deleted successfully",
+                    content = @Content(schema = @Schema(implementation = ApiDataResponse.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Resource not found"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Bad request"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error"
+            )
+    })
+
+    public ResponseEntity<ApiDataResponse<?>> deleteApplicantById(@PathVariable Long id) {
+        Optional<Applicant> applicant = applicantService.findApplicantById(id);
+
+        logger.info("Delete applicant by id successfully");
+
+        if (applicant.isEmpty()) {
+            logger.info("Applicant not found");
+            return ResponseEntity.ok(
+                    new ApiDataResponse<>(
+                            false,
+                            "Applicant not found",
+                            applicant
+                    )
+            );
+        }
+
+        applicantService.deleteApplicantById(id);
+
+        return ResponseEntity.ok(
+                new ApiDataResponse<>(
+                        true,
+                        "Applicant deleted successfully",
+                        applicant
+                )
+        );
+    }
 }

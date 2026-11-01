@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ApplicantUpdateRequest {
 
+    private Long id;
     private String profilePhotoUrl;
     private String firstName;
     private String middleName;

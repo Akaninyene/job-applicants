@@ -6,7 +6,9 @@ import com.example.job.applicants.request.ApplicantUpdateRequest;
 import com.example.job.applicants.repository.ApplicantRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApplicantService {
@@ -18,7 +20,7 @@ public class ApplicantService {
         this.applicantRepository = applicantRepository;
     }
 
-//method to save a new applicant
+    //method to create and save a new applicant
     public Applicant saveApplicant(ApplicantRequest applicantRequest) {
 
         //applicant management
@@ -46,9 +48,54 @@ public class ApplicantService {
         return applicantRepository.save(applicants);
     }
 
-//method to find all staff
+    //method to find all applicants
     public List<Applicant> findAllApplicants() {
         return applicantRepository.findAll();
     }
 
+
+    //method to find applicant by id
+    public Optional<Applicant> findApplicantById(Long id) {
+        return applicantRepository.findById(id);
+    }
+
+    //method to update applicant
+    public Applicant updateApplicant(ApplicantUpdateRequest applicantUpdateRequest) {
+
+        Applicant applicants = applicantRepository.findById(applicantUpdateRequest.getId()).orElse(null);
+        applicants.setProfilePhotoUrl(applicantUpdateRequest.getProfilePhotoUrl());
+        applicants.setFirstName(applicantUpdateRequest.getFirstName());
+        applicants.setMiddleName(applicantUpdateRequest.getMiddleName());
+        applicants.setLastName(applicantUpdateRequest.getLastName());
+        applicants.setDateOfBirth(applicantUpdateRequest.getDateOfBirth());
+        applicants.setGender(applicantUpdateRequest.getGender());
+        applicants.setMaritalStatus(applicantUpdateRequest.getMaritalStatus());
+        applicants.setEmail(applicantUpdateRequest.getEmail());
+        applicants.setPhoneNumber(applicantUpdateRequest.getPhoneNumber());
+        applicants.setAlternativePhoneNumber(applicantUpdateRequest.getAlternativePhoneNumber());
+        applicants.setAddress(applicantUpdateRequest.getAddress());
+        applicants.setVillage(applicantUpdateRequest.getVillage());
+        applicants.setLocalGovernment(applicantUpdateRequest.getLocalGovernment());
+        applicants.setState(applicantUpdateRequest.getState());
+        applicants.setNationality(applicantUpdateRequest.getNationality());
+        applicants.setPostCode(applicantUpdateRequest.getPostCode());
+        applicants.setNokFullName(applicantUpdateRequest.getNokFullName());
+        applicants.setNokPhoneNumber(applicantUpdateRequest.getNokPhoneNumber());
+        applicants.setNokRelationship(applicantUpdateRequest.getNokRelationship());
+
+        return applicantRepository.save(applicants);
+
+    }
+
+    //method to delete applicant by id
+    public void deleteApplicantById(Long id) {
+        applicantRepository.deleteById(id);
+    }
 }
+
+
+
+
+
+
+
