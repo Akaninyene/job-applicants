@@ -7,6 +7,7 @@ import com.example.job.applicants.request.ReferenceUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReferenceService {
@@ -37,5 +38,30 @@ public class ReferenceService {
 
     //method to find all references
     public List<Reference> findAllReferences() { return referenceRepository.findAll();
+    }
+
+    //method to find reference by id
+    public Optional<Reference> findReferenceById(Long id) {
+        return referenceRepository.findById(id);
+    }
+
+    //method to update reference
+    public Reference updateReference(ReferenceUpdateRequest referenceUpdateRequest) {
+
+        Reference references = referenceRepository.findById(referenceUpdateRequest.getId()).orElse(null);
+        references.setRefereeFullName(referenceUpdateRequest.getRefereeFullName());
+        references.setJobTitle(referenceUpdateRequest.getJobTitle());
+        references.setOrganisation(referenceUpdateRequest.getOrganisation());
+        references.setRelationship(referenceUpdateRequest.getRelationship());
+        references.setEmail(referenceUpdateRequest.getEmail());
+        references.setPhoneNumber(referenceUpdateRequest.getPhoneNumber());
+        references.setContactTime(referenceUpdateRequest.getContactTime());
+
+        return referenceRepository.save(references);
+    }
+
+    //method to delete reference by id
+    public void deleteReferenceById(Long id) {
+        referenceRepository.deleteById(id);
     }
 }
